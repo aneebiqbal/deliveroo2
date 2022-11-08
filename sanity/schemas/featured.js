@@ -10,16 +10,16 @@ export default {
         validation: (Rule) => Rule.required(),
       },
       {
-        name: 'image',
-        title: 'image of Category',
-        type: 'image',
+        name: 'short_description',
+        title: 'Short description',
+        type: 'string',
         validation: (Rule) => Rule.max(200),
       },
       {
         name: 'resturants',
         title: 'Resturants',
         type: 'array',
-        of:[{type:'reference', to:[{type: 'resturant'}]}]
+        of:[{type:'reference', to:[{type: 'resturant'}] }]
       },
     ],
   }

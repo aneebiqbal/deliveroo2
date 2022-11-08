@@ -13,7 +13,7 @@ export default {
       name: 'short_description',
       title: 'Short description',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.max(200),
     },
     {
       name: 'price',
