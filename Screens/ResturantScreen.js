@@ -13,10 +13,15 @@ import {
 import { Divider } from 'react-native-paper';
 import { QuestionMarkCircleIcon } from 'react-native-heroicons/outline';
 import DishRow from '../Components/dishRow';
+import BasketIcon from '../Components/basketIcon';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setRestaurant } from '../features/restaurantSlice';
 
 
 const ResturantScreen = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
     const { params: {
         id,
         imgUrl,
@@ -31,6 +36,23 @@ const ResturantScreen = () => {
     },
     } = useRoute();
 
+    useEffect(() => {
+        dispatch(setRestaurant({
+            id,
+            imgUrl,
+            title,
+            rating,
+            genre,
+            address,
+            short_description,
+            dishes,
+            long,
+            lat,
+            })
+        );
+    },
+    [dispatch]);
+
     useLayoutEffect(() =>{
         navigation.setOptions({
             headerShown: false,
@@ -38,6 +60,8 @@ const ResturantScreen = () => {
         });
     }, []);
   return (
+    <>
+    <BasketIcon/>
     <ScrollView>
         <View style={tw `relative`}>
             <Image
@@ -84,7 +108,7 @@ const ResturantScreen = () => {
             <Divider/>
         </View>
 
-        <View>
+        <View style={tw `pb-36`}>
             <Text style={tw `px-4 pt-6 mb-3 font-bold text-xl`}>
                 Menu
             </Text>
@@ -101,6 +125,7 @@ const ResturantScreen = () => {
             ))}
         </View>
     </ScrollView>
+    </>
   )
 }
 
